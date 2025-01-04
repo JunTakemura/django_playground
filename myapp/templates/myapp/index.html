@@ -1,0 +1,52 @@
+{% extends "myapp/base.html" %}
+
+{% block title %}
+Rexxsit - Home
+{% endblock title %}
+
+{% block content %}
+<!-- Example: heading for the main feed -->
+<h2 style="margin-bottom: 12px;">Front Page</h2>
+
+<!-- Post creation form -->
+<div class="post-box">
+    <h3>Create a Post</h3>
+    <form id="postForm" method="POST" action="{% url 'create_post' %}">
+        {% csrf_token %}
+        <div style="margin-bottom: 8px;">
+            <label for="title">Title:</label><br>
+            <input type="text" name="title" id="title" style="width: 60%;" required>
+        </div>
+
+        <div style="margin-bottom: 8px;">
+            <label for="content">Markdown Content:</label><br>
+            <textarea name="content" id="content" rows="4" style="width: 60%;" required></textarea>
+        </div>
+
+        <button type="submit" style="background: #0079d3; color: #fff; border: none; padding: 6px 12px; cursor: pointer;">
+            Submit
+        </button>
+    </form>
+</div>
+
+<!-- List of posts -->
+<div class="post-box">
+    <h3>All Posts</h3>
+    <ul style="list-style: none; margin-left: 0;">
+        {% for post in posts %}
+        <li style="border-bottom: 1px solid #eee; padding: 8px 0;">
+            <div style="font-weight: bold; margin-bottom: 4px;">
+                {{ post.title }}
+            </div>
+            <!-- this is intentionally vulnerable to xss! don't ever use this for real!-->
+            <div>
+                {{ post.content|safe }}
+            </div>
+        </li>
+        {% empty %}
+        <li>No posts yet.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock content %}
+
