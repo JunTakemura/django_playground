@@ -20,10 +20,10 @@
 
 -->
 
-<h3 align="center">Title</h3>
+<h3 align="center">Django Playground</h3>
 
   <p align="center">
-    Description
+    This is a testing ground web app for pentesting. Do not use this code in production!
     <br />
     <!--
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
